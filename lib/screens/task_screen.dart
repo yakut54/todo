@@ -14,19 +14,14 @@ class TaskScreen extends StatefulWidget {
 
 class _TaskScreenState extends State<TaskScreen> {
   _addTask(BuildContext context) {
-    final shared = List.filled(13, []);
-    shared[0].add(123);
-    shared[1].add(3445);
-
-    print(shared);
-
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) {
         return SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom + 50,
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
             child: const AddTaskScreen(),
           ),
