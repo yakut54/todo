@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:todo/blocs/bloc_exports.dart';
 import 'package:todo/models/task.dart';
-import 'package:todo/screens/add_task_screen.dart';
+import 'package:todo/screens/my_drawer.dart';
 import 'package:todo/widgets/task_list.dart';
+import 'package:todo/blocs/bloc_exports.dart';
+import 'package:todo/screens/add_task_screen.dart';
 
-// ignore: must_be_immutable
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
+
+  static const id = 'tasks_screen';
 
   @override
   State<TaskScreen> createState() => _TaskScreenState();
@@ -47,29 +49,30 @@ class _TaskScreenState extends State<TaskScreen> {
               )
             ],
           ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Center(
-                  child: Chip(
-                    label: Text('Tasks: '),
-                  ),
+          drawer: const MyDrawer(),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Chip(
+                  label: Text('Tasks: ${tasksList.length}'),
                 ),
-                TasksList(tasksList: tasksList),
-              ],
-            ),
+              ),
+              TasksList(tasksList: tasksList),
+            ],
           ),
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
+                heroTag: '1',
                 onPressed: () => {},
                 tooltip: 'Test',
                 child: const Icon(Icons.terminal_rounded),
               ),
               const SizedBox(height: 10),
               FloatingActionButton(
+                heroTag: '2',
                 onPressed: () => _addTask(context),
                 tooltip: 'Add Task',
                 child: const Icon(Icons.add),
